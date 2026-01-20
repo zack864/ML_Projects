@@ -1,5 +1,6 @@
 import pandas as pd
 import pickle
+import joblib
 from sklearn.preprocessing import LabelEncoder
 from imblearn.over_sampling import SMOTE
 from sklearn.ensemble import RandomForestClassifier
@@ -26,4 +27,6 @@ with open('credit_model.pkl', 'wb') as f:
     pickle.dump(model, f)
 with open('encoders.pkl', 'wb') as f:
     pickle.dump(encoders, f)
+joblib.dump(model, 'credit_model.joblib', compress=3)
+
 print('1')
