@@ -11,6 +11,7 @@ target = pd.DataFrame({'ID': credit['ID'].unique()})
 target['Target'] = target['ID'].apply(lambda x: 1 if x in hru else 0)
 final_df = app_rec.merge(target, on='ID', how='inner')
 final_df.drop('ID', axis=1, inplace=True)
+final_df.fillna(0, inplace=True)
 encoders = {}
 cat_cols = final_df.select_dtypes(include=['object']).columns
 for col in cat_cols:
@@ -30,3 +31,4 @@ with open('encoders.pkl', 'wb') as f:
 joblib.dump(model, 'credit_model.joblib', compress=3)
 
 print('1')
+
