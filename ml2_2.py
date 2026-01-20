@@ -1,8 +1,8 @@
 import streamlit as st
 import pandas as pd
 import pickle
-with open('credit_model.pkl', 'rb') as f:
-    model = pickle.load(f)
+import joblib
+model = joblib.load('credit_model.joblib')
 with open('encoders.pkl', 'rb') as f:
     encoders = pickle.load(f)
 st.title("Credit Risk Prediction App")
@@ -47,4 +47,5 @@ if st.button("Predict Risk"):
     if prediction[0] == 1:
         st.error(f"High Risk! (Probability: {probability:.2%})")
     else:
+
         st.success(f"Low Risk - Approved (Probability: {probability:.2%})")
